@@ -38,7 +38,7 @@ import io.swagger.client.model.ProgressResponseBody;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-
+import java.io.InputStream;
 import java.io.File;
 import io.swagger.client.model.transientDocuments.TransientDocumentResponse;
 
@@ -178,8 +178,142 @@ public class TransientDocumentsApi {
                 localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
+    /**
+     * Build call for createTransientDocument
+     * 
+     * @param authorization           An &lt;a href&#x3D;\&quot;#\&quot;
+     *                                onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot;
+     *                                oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot;
+     *                                target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth
+     *                                Access Token&lt;/a&gt; with any of the
+     *                                following scopes:&lt;ul&gt;&lt;li
+     *                                style&#x3D;&#39;list-style-type:
+     *                                square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot;
+     *                                onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot;
+     *                                oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot;
+     *                                target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_write&lt;/a&gt;&lt;/li&gt;&lt;li
+     *                                style&#x3D;&#39;list-style-type:
+     *                                square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot;
+     *                                onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_sign&#39;)\&quot;
+     *                                oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_sign&#39;)\&quot;
+     *                                target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_sign&lt;/a&gt;&lt;/li&gt;&lt;li
+     *                                style&#x3D;&#39;list-style-type:
+     *                                square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot;
+     *                                onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;widget_write&#39;)\&quot;
+     *                                oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;widget_write&#39;)\&quot;
+     *                                target&#x3D;\&quot;oauthDoc\&quot;&gt;widget_write&lt;/a&gt;&lt;/li&gt;&lt;li
+     *                                style&#x3D;&#39;list-style-type:
+     *                                square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot;
+     *                                onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_write&#39;)\&quot;
+     *                                oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_write&#39;)\&quot;
+     *                                target&#x3D;\&quot;oauthDoc\&quot;&gt;library_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in
+     *                                the format &lt;b&gt;&#39;Bearer
+     *                                {accessToken}&#39;. (required)
+     * @param file                    The file part of the multipart request for
+     *                                document upload. You can upload only one file
+     *                                at a time. (required)
+     * @param xApiUser                The userId or email of API caller using the
+     *                                account or group token in the format
+     *                                &lt;b&gt;userid:{userId} OR
+     *                                email:{email}.&lt;/b&gt; If it is not
+     *                                specified, then the caller is inferred from
+     *                                the token. (optional)
+     * @param xOnBehalfOfUser         The userId or email in the format
+     *                                &lt;b&gt;userid:{userId} OR
+     *                                email:{email}.&lt;/b&gt; of the user that has
+     *                                shared his/her account (optional)
+     * @param fileName                A name for the document being uploaded.
+     *                                Maximum number of characters in the name is
+     *                                restricted to 255. (optional)
+     * @param mimeType                The mime type of the document being uploaded.
+     *                                If not specified here then mime type is picked
+     *                                up from the file object. If mime type is not
+     *                                present there either then mime type is
+     *                                inferred from file name extension. (optional)
+     * @param progressListener        Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call createTransientDocumentCall(String authorization, InputStream file, String xApiUser,
+            String xOnBehalfOfUser, String fileName, String mimeType,
+            final ProgressResponseBody.ProgressListener progressListener,
+            final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/transientDocuments";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        if (authorization != null)
+            localVarHeaderParams.put("Authorization", apiClient.parameterToString(authorization));
+        if (xApiUser != null)
+            localVarHeaderParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+        if (xOnBehalfOfUser != null)
+            localVarHeaderParams.put("x-on-behalf-of-user", apiClient.parameterToString(xOnBehalfOfUser));
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+        if (fileName != null)
+            localVarFormParams.put("File-Name", fileName);
+        if (mimeType != null)
+            localVarFormParams.put("Mime-Type", mimeType);
+        if (file != null)
+            localVarFormParams.put("File", file);
+
+        final String[] localVarAccepts = { "application/json" };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null)
+            localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = { "multipart/form-data" };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if (progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain)
+                        throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                            .body(new ProgressResponseBody(originalResponse.body(), progressListener)).build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {};
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams,
+                localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
     @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call createTransientDocumentValidateBeforeCall(String authorization, File file,
+            String xApiUser, String xOnBehalfOfUser, String fileName, String mimeType,
+            final ProgressResponseBody.ProgressListener progressListener,
+            final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+
+        // verify the required parameter 'authorization' is set
+        if (authorization == null) {
+            throw new ApiException(
+                    "Missing the required parameter 'authorization' when calling createTransientDocument(Async)");
+        }
+
+        // verify the required parameter 'file' is set
+        if (file == null) {
+            throw new ApiException("Missing the required parameter 'file' when calling createTransientDocument(Async)");
+        }
+
+        com.squareup.okhttp.Call call = createTransientDocumentCall(authorization, file, xApiUser, xOnBehalfOfUser,
+                fileName, mimeType, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call createTransientDocumentValidateBeforeCall(String authorization, InputStream file,
             String xApiUser, String xOnBehalfOfUser, String fileName, String mimeType,
             final ProgressResponseBody.ProgressListener progressListener,
             final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
@@ -322,11 +456,145 @@ public class TransientDocumentsApi {
      *                        file object. If mime type is not present there either
      *                        then mime type is inferred from file name extension.
      *                        (optional)
+     * @return TransientDocumentResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot
+     *                      deserialize the response body
+     */
+    public TransientDocumentResponse createTransientDocument(String authorization, InputStream file, String xApiUser,
+            String xOnBehalfOfUser, String fileName, String mimeType) throws ApiException {
+        ApiResponse<TransientDocumentResponse> resp = createTransientDocumentWithHttpInfo(authorization, file, xApiUser,
+                xOnBehalfOfUser, fileName, mimeType);
+        return resp.getData();
+    }
+
+    /**
+     * Uploads a document and obtains the document&#39;s ID. The document uploaded
+     * through this call is referred to as transient since it is available only for
+     * 7 days after the upload. The returned transient document ID can be used in
+     * the API calls where the uploaded file needs to be referred. The transient
+     * document request is a multipart request consisting of three parts - filename,
+     * mime type and the file stream. You can only upload one file at a time in this
+     * request.
+     * 
+     * @param authorization   An &lt;a href&#x3D;\&quot;#\&quot;
+     *                        onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot;
+     *                        oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot;
+     *                        target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access
+     *                        Token&lt;/a&gt; with any of the following
+     *                        scopes:&lt;ul&gt;&lt;li
+     *                        style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a
+     *                        href&#x3D;\&quot;#\&quot;
+     *                        onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot;
+     *                        oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot;
+     *                        target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_write&lt;/a&gt;&lt;/li&gt;&lt;li
+     *                        style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a
+     *                        href&#x3D;\&quot;#\&quot;
+     *                        onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_sign&#39;)\&quot;
+     *                        oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_sign&#39;)\&quot;
+     *                        target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_sign&lt;/a&gt;&lt;/li&gt;&lt;li
+     *                        style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a
+     *                        href&#x3D;\&quot;#\&quot;
+     *                        onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;widget_write&#39;)\&quot;
+     *                        oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;widget_write&#39;)\&quot;
+     *                        target&#x3D;\&quot;oauthDoc\&quot;&gt;widget_write&lt;/a&gt;&lt;/li&gt;&lt;li
+     *                        style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a
+     *                        href&#x3D;\&quot;#\&quot;
+     *                        onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_write&#39;)\&quot;
+     *                        oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_write&#39;)\&quot;
+     *                        target&#x3D;\&quot;oauthDoc\&quot;&gt;library_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in
+     *                        the format &lt;b&gt;&#39;Bearer {accessToken}&#39;.
+     *                        (required)
+     * @param file            The file part of the multipart request for document
+     *                        upload. You can upload only one file at a time.
+     *                        (required)
+     * @param xApiUser        The userId or email of API caller using the account or
+     *                        group token in the format &lt;b&gt;userid:{userId} OR
+     *                        email:{email}.&lt;/b&gt; If it is not specified, then
+     *                        the caller is inferred from the token. (optional)
+     * @param xOnBehalfOfUser The userId or email in the format
+     *                        &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt;
+     *                        of the user that has shared his/her account (optional)
+     * @param fileName        A name for the document being uploaded. Maximum number
+     *                        of characters in the name is restricted to 255.
+     *                        (optional)
+     * @param mimeType        The mime type of the document being uploaded. If not
+     *                        specified here then mime type is picked up from the
+     *                        file object. If mime type is not present there either
+     *                        then mime type is inferred from file name extension.
+     *                        (optional)
      * @return ApiResponse&lt;TransientDocumentResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot
      *                      deserialize the response body
      */
     public ApiResponse<TransientDocumentResponse> createTransientDocumentWithHttpInfo(String authorization, File file,
+            String xApiUser, String xOnBehalfOfUser, String fileName, String mimeType) throws ApiException {
+        com.squareup.okhttp.Call call = createTransientDocumentValidateBeforeCall(authorization, file, xApiUser,
+                xOnBehalfOfUser, fileName, mimeType, null, null);
+        Type localVarReturnType = new TypeToken<TransientDocumentResponse>() {
+        }.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Uploads a document and obtains the document&#39;s ID. The document uploaded
+     * through this call is referred to as transient since it is available only for
+     * 7 days after the upload. The returned transient document ID can be used in
+     * the API calls where the uploaded file needs to be referred. The transient
+     * document request is a multipart request consisting of three parts - filename,
+     * mime type and the file stream. You can only upload one file at a time in this
+     * request.
+     * 
+     * @param authorization   An &lt;a href&#x3D;\&quot;#\&quot;
+     *                        onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot;
+     *                        oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot;
+     *                        target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access
+     *                        Token&lt;/a&gt; with any of the following
+     *                        scopes:&lt;ul&gt;&lt;li
+     *                        style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a
+     *                        href&#x3D;\&quot;#\&quot;
+     *                        onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot;
+     *                        oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot;
+     *                        target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_write&lt;/a&gt;&lt;/li&gt;&lt;li
+     *                        style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a
+     *                        href&#x3D;\&quot;#\&quot;
+     *                        onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_sign&#39;)\&quot;
+     *                        oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_sign&#39;)\&quot;
+     *                        target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_sign&lt;/a&gt;&lt;/li&gt;&lt;li
+     *                        style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a
+     *                        href&#x3D;\&quot;#\&quot;
+     *                        onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;widget_write&#39;)\&quot;
+     *                        oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;widget_write&#39;)\&quot;
+     *                        target&#x3D;\&quot;oauthDoc\&quot;&gt;widget_write&lt;/a&gt;&lt;/li&gt;&lt;li
+     *                        style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a
+     *                        href&#x3D;\&quot;#\&quot;
+     *                        onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_write&#39;)\&quot;
+     *                        oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_write&#39;)\&quot;
+     *                        target&#x3D;\&quot;oauthDoc\&quot;&gt;library_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in
+     *                        the format &lt;b&gt;&#39;Bearer {accessToken}&#39;.
+     *                        (required)
+     * @param file            The file part of the multipart request for document
+     *                        upload. You can upload only one file at a time.
+     *                        (required)
+     * @param xApiUser        The userId or email of API caller using the account or
+     *                        group token in the format &lt;b&gt;userid:{userId} OR
+     *                        email:{email}.&lt;/b&gt; If it is not specified, then
+     *                        the caller is inferred from the token. (optional)
+     * @param xOnBehalfOfUser The userId or email in the format
+     *                        &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt;
+     *                        of the user that has shared his/her account (optional)
+     * @param fileName        A name for the document being uploaded. Maximum number
+     *                        of characters in the name is restricted to 255.
+     *                        (optional)
+     * @param mimeType        The mime type of the document being uploaded. If not
+     *                        specified here then mime type is picked up from the
+     *                        file object. If mime type is not present there either
+     *                        then mime type is inferred from file name extension.
+     *                        (optional)
+     * @return ApiResponse&lt;TransientDocumentResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot
+     *                      deserialize the response body
+     */
+    public ApiResponse<TransientDocumentResponse> createTransientDocumentWithHttpInfo(String authorization, InputStream file,
             String xApiUser, String xOnBehalfOfUser, String fileName, String mimeType) throws ApiException {
         com.squareup.okhttp.Call call = createTransientDocumentValidateBeforeCall(authorization, file, xApiUser,
                 xOnBehalfOfUser, fileName, mimeType, null, null);
