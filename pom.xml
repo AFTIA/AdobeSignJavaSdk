@@ -44,6 +44,22 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>aftia-artifacts-aftia-internal</id>
+            <name>aftia-artifacts-aftia-internal</name>
+            <url>https://aftia-artifacts-282486032588.d.codeartifact.us-east-2.amazonaws.com/maven/aftia-internal/</url>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>aftia-artifacts-aftia-internal</id>
+            <name>aftia-artifacts-aftia-internal</name>
+            <url>https://aftia-artifacts-282486032588.d.codeartifact.us-east-2.amazonaws.com/maven/aftia-internal/</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
